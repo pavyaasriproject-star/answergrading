@@ -8,7 +8,7 @@ const GEMINI_KEY = process.env.GEMINI_KEY;
 const VISION_KEY = process.env.VISION_KEY;
 
 async function ocrImage(base64) {
-  const res = await fetch(`https://vision.googleapis.com/v1/images:annotate?key=${VISION_KEY}`, {
+  const res = await fetch(`https://vision.googleapis.com/v1/images:annotate?key=${AIzaSyCoFOrHJSJSFejPD-FdjgNK8VJW3K4U1E0}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -38,7 +38,7 @@ Student Answer:
 ${studentText}
 `;
 
-  const res = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${GEMINI_KEY}`, {
+  const res = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${AIzaSyCaAM6uR5VvHTCByVRoj3_ftOvlmz5JJAY}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
