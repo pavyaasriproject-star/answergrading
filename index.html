@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Answer Evaluator</title>
+</head>
+<body>
+  <h2>Upload Files</h2>
+  <form id="form">
+    Question Paper: <input type="file" id="qp"><br><br>
+    Answer Key (typed): <input type="file" id="ak"><br><br>
+    Student Handwritten: <input type="file" id="sh"><br><br>
+    <button type="submit">Evaluate</button>
+  </form>
+  <pre id="result"></pre>
+
+<script>
+document.getElementById('form').onsubmit = async (e) => {
+  e.preventDefault();
+  const fd = new FormData();
+  fd.append('qp', qp.files[0]);
+  fd.append('ak', ak.files[0]);
+  fd.append('sh', sh.files[0]);
+
+  const res = await fetch('/api/evaluate', { method: 'POST', body: fd });
+  const text = await res.text();
+  result.textContent = text;
+};
+</script>
+</body>
+</html>
