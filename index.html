@@ -14,17 +14,28 @@
   <pre id="result"></pre>
 
 <script>
-document.getElementById('form').onsubmit = async (e) => {
+document.getElementById('form').addEventListener('submit', async function(e) {
   e.preventDefault();
-  const fd = new FormData();
-  fd.append('qp', qp.files[0]);
-  fd.append('ak', ak.files[0]);
-  fd.append('sh', sh.files[0]);
 
-  const res = await fetch('/api/evaluate', { method: 'POST', body: fd });
+  const qp = document.getElementById('qp').files[0];
+  const ak = document.getElementById('ak').files[0];
+  const sh = document.getElementById('sh').files[0];
+
+  const fd = new FormData();
+  fd.append('qp', qp);
+  fd.append('ak', ak);
+  fd.append('sh', sh);
+
+  document.getElementById('result').textContent = "Processing... please wait";
+
+  const res = await fetch('/api/evaluate', {
+    method: 'POST',
+    body: fd
+  });
+
   const text = await res.text();
-  result.textContent = text;
-};
+  document.getElementById('result').textContent = text;
+});
 </script>
 </body>
 </html>
